@@ -19,12 +19,10 @@ const copyDirectory = async () => {
 
   try {
     const files = await readdir(pathDir, opt);
-    console.log(files);
     for (const file of files) {
       console.log(path.join(__dirname, 'files', file.name));
       try {
         await copyFile(path.join(__dirname, 'files', file.name), path.join(__dirname, 'newFolder', file.name));
-        console.log('source.txt was copied to destination.txt');
       } catch {
         console.error('The file could not be copied');
       }
