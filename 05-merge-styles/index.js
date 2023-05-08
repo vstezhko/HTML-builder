@@ -2,29 +2,29 @@ const path = require( 'path');
 const { readdir} = require( 'fs/promises')
 const fs = require('fs');
 
-const merge = async () => {
+const bundleStyles = async (destFolder, destFile, srcFolder, dirName = __dirname) => {
 
   const opt = { withFileTypes: true };
-  const pathDir = path.join(__dirname, 'styles');
+  const pathDir = path.join(dirName, srcFolder);
+
 
   fs.writeFile(
-    path.join(__dirname, 'project-dist', 'bundle.css'),
+    path.join(dirName, destFolder, destFile),
     '',
-    (err) => {
+    err => {
       if (err) throw err;
-    }
-  );
+    });
 
   try {
     const files = await readdir(pathDir, opt);
     for (const file of files) {
-      const currPath = path.join(__dirname, file.name);
+      const currPath = path.join(dirName, file.name);
       const ext = path.extname(currPath);
       if (!file.isDirectory() && ext === '.css') {
-        const readableStream = fs.createReadStream(path.join(__dirname, 'styles', file.name), 'utf-8');
+        const readableStream = fs.createReadStream(path.join(dirName, srcFolder, file.name), 'utf-8');
         readableStream.on('data', chunk => {
           fs.appendFile(
-            path.join(__dirname, 'project-dist', 'bundle.css'),
+            path.join(dirName, destFolder, destFile),
             `${chunk}`,
             err => {
               if (err) throw err;
@@ -37,4 +37,8 @@ const merge = async () => {
   }
 };
 
-merge();
+if (require.main === module) {
+  bundleStyles('project-dist', 'bundle.css', 'styles', __dirname);
+}
+
+module.exports = {bundleStyles};
