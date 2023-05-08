@@ -19,7 +19,9 @@ async function copyFolder(srcFolder, destFolder) {
   }
 }
 
-copyFolder(path.join(__dirname, 'files'), path.join(__dirname, 'files-copy'));
+if (require.main === module) {
+  copyFolder(path.join(__dirname, 'files'), path.join(__dirname, 'files-copy'));
+}
 
 module.exports = {copyFolder};
 

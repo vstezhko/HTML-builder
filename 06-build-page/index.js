@@ -3,6 +3,7 @@ const path = require( 'path');
 const { readdir } = require('fs/promises');
 const fs = require('fs');
 const { bundleStyles } = require( '../05-merge-styles/index');
+const { copyFolder } = require( '../04-copy-directory/index');
 
 // async function copyDir(srcDir, destDir) {
 //   await copyFiles.copyFiles(srcDir, destDir);
@@ -21,10 +22,10 @@ try {
   console.error(err.message);
 }
 
-
 const dirName =__dirname;
-console.log(dirName);
-bundleStyles('project-dist', 'bundle.css', 'styles', dirName);
+const distFolder = path.join(dirName, 'project-dist');
+bundleStyles('project-dist', 'style.css', 'styles', dirName);
+copyFolder( path.join(__dirname, 'assets'), path.join(__dirname, 'project-dist','assets'));
 
 // const buildPage = async () => {
 //   try {
