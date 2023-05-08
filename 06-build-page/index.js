@@ -1,7 +1,6 @@
 const { mkdir, stat } = require( 'fs')
 const path = require( 'path');
 const { readFile, writeFile } = require('fs/promises');
-const fs = require('fs');
 const { bundleStyles } = require( '../05-merge-styles/index');
 const { copyFolder } = require( '../04-copy-directory/index');
 
@@ -31,7 +30,6 @@ async function createTemplate(src, componentsFolder) {
       for (let template of componentTemplates) {
         const name = `${template.slice(2, template.length-2)}.html`;
         const fileContent = await readFile(path.join(__dirname, componentsFolder, name));
-
         newFileHTML = newFileHTML.replace(template, fileContent.toString());
       }
 
