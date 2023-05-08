@@ -12,10 +12,8 @@ const merge = async () => {
     '',
     (err) => {
       if (err) throw err;
-      // console.log('Файл был создан');
     }
   );
-
 
   try {
     const files = await readdir(pathDir, opt);
@@ -32,15 +30,6 @@ const merge = async () => {
               if (err) throw err;
             });
         });
-        // let fileContent = null;
-        // readableStream.on('data', chunk => fileContent += chunk);
-        //
-        // fs.appendFile(
-        //   path.join(__dirname, 'project-dist', 'bundle.css'),
-        //   `${fileContent}`,
-        //   err => {
-        //     if (err) throw err;
-        //   });
       }
     }
   } catch (err) {
