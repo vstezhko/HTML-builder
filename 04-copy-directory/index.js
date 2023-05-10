@@ -1,7 +1,8 @@
-const { mkdir, copyFile, readdir, stat} = require('fs/promises');
+const { mkdir, copyFile, readdir, stat, rm} = require('fs/promises');
 const path = require('path');
 
 async function copyFolder(srcFolder, destFolder) {
+  await rm(destFolder, { recursive: true, force: true });
   await mkdir(destFolder, { recursive: true });
   const entries = await readdir(srcFolder);
 
