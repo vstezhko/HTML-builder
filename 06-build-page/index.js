@@ -23,7 +23,7 @@ async function createTemplate(src, componentsFolder) {
   try {
     const template = await readFile(src);
     const stringTemplate = template.toString();
-    const componentTemplates = stringTemplate.match(/{{(.*)}}/gi);
+    const componentTemplates = stringTemplate.match(/{{(.*?)}}/gi);
     let newFileHTML = stringTemplate;
 
     if (componentTemplates) {
