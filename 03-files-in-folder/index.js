@@ -14,7 +14,7 @@ const readFolder = async() => {
         const ext = path.extname(currPath).split('.')[1];
         stat(currPath, (err, stats) => {
           const size = stats.size;
-          console.log(`${name} - ${ext} - ${size}kb`);
+          console.log(`${name} - ${ext} - ${size}bytes`);
         });
       }
     }
